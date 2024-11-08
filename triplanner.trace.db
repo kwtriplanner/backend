@@ -1,0 +1,6 @@
+2024-11-04 23:32:57.340082+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (user_id bigint not null, name varchar(255), password varchar(255), username varchar(255), primary key (user_id))"; expected "identifier"; SQL statement:
+create table user (user_id bigint not null, name varchar(255), password varchar(255), username varchar(255), primary key (user_id)) [42001-224]
+2024-11-04 23:34:41.617567+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (user_id bigint not null, name varchar(255), password varchar(255), username varchar(255), primary key (user_id))"; expected "identifier"; SQL statement:
+create table user (user_id bigint not null, name varchar(255), password varchar(255), username varchar(255), primary key (user_id)) [42001-224]
