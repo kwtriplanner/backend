@@ -1,4 +1,4 @@
-package capstone.triplanner.member.domain;
+package capstone.triplanner.member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

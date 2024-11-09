@@ -1,10 +1,8 @@
-package capstone.triplanner.member.controller;
+package capstone.triplanner.member;
 
 import capstone.triplanner.member.dto.LoginRequestDTO;
 import capstone.triplanner.member.dto.LoginResponseDTO;
 import capstone.triplanner.member.dto.MemberDTO;
-import capstone.triplanner.member.service.AuthService;
-import capstone.triplanner.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

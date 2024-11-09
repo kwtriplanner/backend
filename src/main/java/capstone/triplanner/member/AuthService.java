@@ -1,4 +1,4 @@
-package capstone.triplanner.member.service;
+package capstone.triplanner.member;
 
 import capstone.triplanner.member.dto.MemberDTO;
 import capstone.triplanner.token.TokenProvider;

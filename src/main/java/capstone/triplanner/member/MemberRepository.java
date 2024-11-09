@@ -1,6 +1,6 @@
-package capstone.triplanner.member.repository;
+package capstone.triplanner.member;
 
-import capstone.triplanner.member.domain.Member;
+import capstone.triplanner.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

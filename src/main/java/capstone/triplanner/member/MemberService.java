@@ -1,8 +1,8 @@
-package capstone.triplanner.member.service;
+package capstone.triplanner.member;
 
-import capstone.triplanner.member.domain.Member;
+import capstone.triplanner.member.Member;
 import capstone.triplanner.member.dto.MemberDTO;
-import capstone.triplanner.member.repository.MemberRepository;
+import capstone.triplanner.member.MemberRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

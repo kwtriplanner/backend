@@ -1,6 +1,7 @@
 package capstone.triplanner.member.service;
 
-import capstone.triplanner.member.domain.Member;
+import capstone.triplanner.member.Member;
+import capstone.triplanner.member.MemberService;
 import capstone.triplanner.member.dto.MemberDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.DisplayName;

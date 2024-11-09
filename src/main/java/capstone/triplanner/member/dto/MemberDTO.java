@@ -1,6 +1,6 @@
 package capstone.triplanner.member.dto;
 
-import capstone.triplanner.member.domain.Member;
+import capstone.triplanner.member.Member;
 import lombok.Builder;
 import lombok.Getter;
 
