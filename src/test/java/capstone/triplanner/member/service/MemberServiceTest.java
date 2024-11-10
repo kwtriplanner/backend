@@ -79,11 +79,34 @@ class MemberServiceTest {
         assertThat(memberService.isUsernameTaken("notUsername")).isEqualTo(false);
     }
 
+    @Test
+    @Transactional
+    @DisplayName("업데이트 후 변경 확인")
+    void updateMember() {
+        //given
+        Member member = createTestMember();
+
+        //when
+        MemberDTO memberDTO = memberService.createMember(MemberDTO.from(member));
+        MemberDTO updatedMemberDTO = MemberDTO.builder()
+                .name("업데이트 테스트")
+                .username("test")
+                .password("1234")
+                .email("zzq3902@naver.com")
+                .phoneNumber("01012345678")
+                .build();
+        memberService.updateMember(memberDTO.getId(), updatedMemberDTO);
+
+        //then
+        assertThat(memberService.findMemberById(memberDTO.getId()).getName()).isEqualTo(updatedMemberDTO.getName());
+    }
     private Member createTestMember() {
         Member member = Member.builder()
                 .name("테스트")
                 .username("test")
                 .password("1234")
+                .email("zzq3902@naver.com")
+                .phoneNumber("01012345678")
                 .build();
         return member;
     }

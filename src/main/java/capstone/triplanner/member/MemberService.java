@@ -39,6 +39,16 @@ public class MemberService {
     }
 
     @Transactional
+    public void updateMember(Long id, MemberDTO memberDTO) {
+        MemberDTO updateMemberDTO = MemberDTO.builder()
+                .name(memberDTO.getName())
+                .username(memberDTO.getUsername())
+                .password(encodePassword(memberDTO.getPassword()))
+                .build();
+        Member foundMember = getMemberById(id);
+        foundMember.update(updateMemberDTO);
+    }
+    @Transactional
     public void deleteMember(Long id) {
         memberRepository.delete(getMemberById(id));
     }

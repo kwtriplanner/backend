@@ -21,7 +21,7 @@ class UserRepositoryTest {
     @DisplayName("아이디 저장 후 이름과 아이디, 비밀번호가 모두 일치해야 한다.")
     void saveAndFind() {
         //given
-        Member member = new Member("김주현", "zzq", "1234");
+        Member member = new Member("김주현", "zzq", "1234", "zzq3902@naver.com", "01012345678");
 
         //when
         memberRepository.save(member);
