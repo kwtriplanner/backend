@@ -6,14 +6,17 @@ import capstone.triplanner.trip.Trip;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Member {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEMBER_ID")
     private Long id;
 
@@ -24,10 +27,10 @@ public class Member {
     private String phoneNumber;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<Trip> trips;
+    private List<Trip> trips = new ArrayList<>();
 
     @Builder
     public Member(String name, String username, String password, String email, String phoneNumber) {

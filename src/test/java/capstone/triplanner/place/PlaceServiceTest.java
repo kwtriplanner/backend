@@ -1,7 +1,7 @@
 package capstone.triplanner.place;
 
 import capstone.triplanner.place.dto.PlaceDTO;
-import org.assertj.core.api.Assertions;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,12 +49,17 @@ class PlaceServiceTest {
     }
 
     @Test
+    @DisplayName("삭제 후 조회시 예외 발생")
     void deletePlace() {
         //given
+        Place testPlace = createTestPlace();
 
         //when
+        PlaceDTO placeDTO = placeService.createPlace(PlaceDTO.from(testPlace));
+        placeService.deletePlace(placeDTO.getId());
 
         //then
+        assertThatThrownBy(() -> placeService.findPlaceById(placeDTO.getId())).isInstanceOf(EntityNotFoundException.class);
     }
 
     @Test

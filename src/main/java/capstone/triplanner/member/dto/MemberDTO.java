@@ -7,6 +7,7 @@ import lombok.Getter;
 // 비밀번호 없는 DTO도 생성해야함
 
 @Getter
+@Builder
 public class MemberDTO {
 
     private final Long id;
@@ -15,16 +16,6 @@ public class MemberDTO {
     private final String password;
     private final String email;
     private final String phoneNumber;
-
-    @Builder
-    public MemberDTO(Long id, String name, String username, String password, String email, String phoneNumber) {
-        this.id = id;
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
 
 
     public static MemberDTO from(Member member) {

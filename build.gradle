@@ -20,7 +20,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	runtimeOnly 'com.h2database:h2'
+//	runtimeOnly 'com.h2database:h2' h2 데이터베이스
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -28,6 +28,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	runtimeOnly 'mysql:mysql-connector-java:8.0.32'
 }
 
 tasks.named('test') {
