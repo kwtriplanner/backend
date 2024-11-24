@@ -36,7 +36,6 @@ out/
 ### VS Code ###
 .vscode/
 
-application.properties
 test-results/
 
 # Log files
