@@ -21,11 +21,11 @@ public class AuthService {
         if (memberDTO == null || !verifyPassword(rawPassword, memberDTO.getPassword())) {
             throw new BadCredentialsException("login failed");
         }
-        return generateToken(memberDTO.getId());
+        return generateToken(memberDTO.getUsername());
     }
 
-    private String generateToken(Long id) {
-        return tokenProvider.createToken(id);
+    private String generateToken(String username) {
+        return tokenProvider.createToken(username);
     }
 
     public boolean validateToken(String token) {
@@ -36,7 +36,7 @@ public class AuthService {
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
-    public Long getIdFromToken(String token) {
-        return tokenProvider.getIdFromToken(token);
+    public String getUsernameFromToken(String token) {
+        return tokenProvider.getUsername(token);
     }
 }

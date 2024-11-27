@@ -23,16 +23,17 @@ public class MemberController {
             String token = authService.authenticate(loginRequestDTO.getUsername(), loginRequestDTO.getPassword());
             return ResponseEntity.ok(new LoginResponseDTO(loginRequestDTO.getUsername(), token));
         } catch (BadCredentialsException ex) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("invalid credentials");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signUp(@RequestBody MemberDTO memberDTO) {
+    public ResponseEntity<Object> signUp(@RequestBody MemberDTO memberDTO) {
         if (memberService.isUsernameTaken(memberDTO.getUsername())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already taken");
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
+        System.out.println(memberDTO.getName());
         memberService.createMember(memberDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Sign up success");
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

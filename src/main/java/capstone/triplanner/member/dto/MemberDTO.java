@@ -1,21 +1,25 @@
 package capstone.triplanner.member.dto;
 
 import capstone.triplanner.member.Member;
-import lombok.Builder;
-import lombok.Getter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.*;
 
 // 비밀번호 없는 DTO도 생성해야함
 
 @Getter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+
 public class MemberDTO {
 
-    private final Long id;
-    private final String name;
-    private final String username;
-    private final String password;
-    private final String email;
-    private final String phoneNumber;
+    private Long id;
+    private String name;
+    private String username;
+    private String password;
+    private String email;
+    private String phoneNumber;
 
 
     public static MemberDTO from(Member member) {

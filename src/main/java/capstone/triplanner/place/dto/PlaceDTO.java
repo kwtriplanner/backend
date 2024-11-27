@@ -6,11 +6,11 @@ import lombok.Getter;
 
 @Getter
 public class PlaceDTO {
-    private final Long id;
-    private final String name;
-    private final String location;
-    private final String category;
-    private final String description;
+    private Long id;
+    private String name;
+    private String location;
+    private String category;
+    private String description;
 
     @Builder
     public PlaceDTO(Long id, String name, String location, String category, String description) {

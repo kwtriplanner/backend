@@ -3,11 +3,15 @@ package capstone.triplanner.review.DTO;
 import capstone.triplanner.member.Member;
 import capstone.triplanner.place.Place;
 import capstone.triplanner.review.Review;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
+@AllArgsConstructor
+@JsonDeserialize(builder = ReviewDTO.ReviewDTOBuilder.class)
 public class ReviewDTO {
     private Long id;
     private Member member;
