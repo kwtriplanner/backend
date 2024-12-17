@@ -15,10 +15,7 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TRIP_ID")
     private Long id;
-
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private String description;
+    
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")

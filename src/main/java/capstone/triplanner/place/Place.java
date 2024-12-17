@@ -28,22 +28,16 @@ public class Place {
     private List<Review> reviews = new ArrayList<>();
 
     private String name;
-    private String location;
     private String category;
-    private String description;
 
     @Builder
     public Place(String name, String location, String category, String description) {
         this.name = name;
-        this.location = location;
         this.category = category;
-        this.description = description;
     }
 
     public void update(PlaceDTO placeDTO) {
         this.name = placeDTO.getName();
-        this.location = placeDTO.getLocation();
         this.category = placeDTO.getCategory();
-        this.description = placeDTO.getCategory();
     }
 }
