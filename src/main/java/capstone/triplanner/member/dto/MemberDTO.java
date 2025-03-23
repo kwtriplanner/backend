@@ -4,6 +4,9 @@ import capstone.triplanner.member.Member;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
 
+import java.util.List;
+import java.util.Map;
+
 // 비밀번호 없는 DTO도 생성해야함
 
 @Getter
@@ -20,6 +23,7 @@ public class MemberDTO {
     private String password;
     private String email;
     private String phoneNumber;
+    private Map<String, List<String>> routeGroup;
 
 
     public static MemberDTO from(Member member) {

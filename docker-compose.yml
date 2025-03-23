@@ -18,9 +18,7 @@ services:
       start_period: 30s
 
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: kjh0620/backend-app:latest
     container_name: springboot-app
     ports:
       - "8086:8086"

@@ -18,6 +18,7 @@ public class AuthFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         String token = getTokenFromRequest((HttpServletRequest) request);
+        System.out.println("token in doFilter = " + token);
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         if (token != null && tokenProvider.validateToken(token)) {
             String username = tokenProvider.getUsername(token);

@@ -32,7 +32,6 @@ public class MemberController {
         if (memberService.isUsernameTaken(memberDTO.getUsername())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        System.out.println(memberDTO.getName());
         memberService.createMember(memberDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

@@ -5,6 +5,7 @@ import capstone.triplanner.member.MemberRepository;
 import capstone.triplanner.place.Place;
 import capstone.triplanner.place.PlaceRepository;
 import capstone.triplanner.review.DTO.ReviewDTO;
+import capstone.triplanner.review.DTO.ReviewRequestDTO;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,69 +14,57 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class ReviewService {
-
     private final ReviewRepository reviewRepository;
     private final MemberRepository memberRepository;
     private final PlaceRepository placeRepository;
 
-
     @Transactional
-    public ReviewDTO createReview(Long memberId, Long placeId, String content, int rating) {
-        Member member = memberRepository.findById(memberId).orElseThrow(
-                () -> new EntityNotFoundException("Member with id " + memberId + " not found")
-        );
-        Place place = placeRepository.findById(placeId).orElseThrow(
-                () -> new EntityNotFoundException("Place with id " + placeId + " not found")
-        );
+    public void createReview(String username, ReviewRequestDTO reviewDTO) {
+        Member member = memberRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));
+        Place place = placeRepository.findByName(reviewDTO.getPlaceName())
+                .orElseGet(() -> {
+                    Place newPlace = new Place(reviewDTO.getPlaceName(), "");
+                    return placeRepository.save(newPlace);
+                });
+
         Review review = Review.builder()
+                .rating(reviewDTO.getRating())
+                .content(reviewDTO.getContent())
+                .createAt(reviewDTO.getCreatedAt())
                 .member(member)
                 .place(place)
-                .content(content)
-                .rating(rating)
                 .build();
-        Review savedReview = reviewRepository.save(review);
-        return ReviewDTO.from(savedReview);
+
+        member.getReviews().add(review);
+        place.getReviews().add(review);
+        reviewRepository.save(review);
     }
 
-    public ReviewDTO findReviewById(Long id) {
-        Review review = getReviewById(id);
-        return ReviewDTO.from(review);
+    public List<Review> getReviewsByMember(String username) {
+        Member member = memberRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+        return reviewRepository.findByMember(member);
     }
 
-    public List<ReviewDTO> findAllByMemberId(Long id) {
-        List<Review> reviews = reviewRepository.findAllByMember_Id(id);
-        return reviews.stream()
-                .map(ReviewDTO::from)
-                .toList();
-    }
+    public List<Review> getReviewsByPlace(String placeName) {
+        Place place = placeRepository.findByName(placeName)
+                .orElseThrow(() -> new RuntimeException("장소를 찾을 수 없습니다."));
 
-    public List<ReviewDTO> findAllByPlaceId(Long id) {
-        List<Review> reviews = reviewRepository.findAllByPlace_Id(id);
-        return reviews.stream()
-                .map(ReviewDTO::from)
-                .toList();
+        return reviewRepository.findByPlace(place);
     }
 
     @Transactional
-    public ReviewDTO updateReview(ReviewDTO reviewDTO) {
-        Review review = getReviewById(reviewDTO.getId());
-        review.update(reviewDTO.getContent(), reviewDTO.getRating());
-        return ReviewDTO.from(review);
-    }
+    public void deleteReview(Long reviewId, String username) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new RuntimeException("해당 리뷰를 찾을 수 없습니다."));
 
-    @Transactional
-    public void deleteReviewById(Long id) {
-        Review review = getReviewById(id);
+        if (!review.getMember().getUsername().equals(username)) {
+            throw new RuntimeException("삭제 권한이 없습니다.");
+        }
         reviewRepository.delete(review);
     }
-    private Review getReviewById(Long id) {
-        return reviewRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("review with id " + id + " not found"));
-    }
-
-
-
 }

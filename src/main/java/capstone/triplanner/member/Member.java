@@ -2,7 +2,7 @@ package capstone.triplanner.member;
 
 import capstone.triplanner.member.dto.MemberDTO;
 import capstone.triplanner.review.Review;
-import capstone.triplanner.trip.Trip;
+import capstone.triplanner.route.Route;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Entity
 @Getter
@@ -29,12 +31,11 @@ public class Member {
     private String email;
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Route> routes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<Trip> trips = new ArrayList<>();
-
     @Builder
     public Member(String name, String username, String password, String email, String phoneNumber) {
         this.name = name;
